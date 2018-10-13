@@ -31,5 +31,11 @@ Withdrawals cannot result in a negative balance.
         {
 
         }
+
+        public BankAccount(string name, decimal initialBalance)
+        {
+            this.Owner = name;
+            this.Balance = initialBalance;
+        }
     }
 }
