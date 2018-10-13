@@ -36,6 +36,15 @@ Withdrawals cannot result in a negative balance.
         private static int accountNumberSeed = 1234567890;
         private List<Transaction> allTransactions = new List<Transaction>();
 
+        public BankAccount(string name, decimal initialBalance)
+        {
+            this.Owner = name;
+            this.Number = accountNumberSeed.ToString();
+            accountNumberSeed++;
+
+            MakeDeposit(initialBalance, DateTime.Now, "Initial balance");
+        }
+
         public void MakeDeposit(decimal amount, DateTime date, string note)
         {
             if (amount <= 0)
@@ -49,7 +58,7 @@ Withdrawals cannot result in a negative balance.
 
         public void MakeWithdrawal(decimal amount, DateTime date, string note)
         {
-            if (amount <=0 )
+            if (amount <= 0 )
             {
                 throw new ArgumentOutOfRangeException(nameof(amount), "Amount of withdrawal must be positive");
             }
@@ -61,15 +70,6 @@ Withdrawals cannot result in a negative balance.
 
             var withdrawal = new Transaction(-amount, date, note);
             allTransactions.Add(withdrawal);
-        }
-
-        public BankAccount(string name, decimal initialBalance)
-        {
-            this.Owner = name;
-            this.Number = accountNumberSeed.ToString();
-            accountNumberSeed++;
-
-            MakeDeposit(initialBalance, DateTime.Now, "Initial balance");
         }
     }
 }
