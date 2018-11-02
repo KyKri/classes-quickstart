@@ -71,5 +71,20 @@ Withdrawals cannot result in a negative balance.
             var withdrawal = new Transaction(-amount, date, note);
             allTransactions.Add(withdrawal);
         }
+
+        public string GetAccountHistory()
+        {
+            StringBuilder history = new StringBuilder();
+
+
+            history.AppendLine($"Account History as of {DateTime.Now}");
+            history.AppendLine($"{"Date",-25} {"Amount",-25} {"Notes",-25}");
+            foreach (var item in allTransactions)
+            {
+                history.AppendLine($"|{item.Date,-25}|{item.Amount,-25:C}|{item.Notes,-25}|");
+            }
+
+            return history.ToString();
+        }
     }
 }
